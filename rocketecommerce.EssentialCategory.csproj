@@ -10,4 +10,10 @@
     <None Remove="packages\**" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\DNNrocketModules\RocketEcommerce\RocketEcommerce.csproj" />
+    <ProjectReference Include="..\..\DNNrocket\API\DNNrocketAPI.csproj" />
+    <ProjectReference Include="..\..\DNNrocket\Simplisity\Simplisity.csproj" />
+  </ItemGroup>
+
 </Project>

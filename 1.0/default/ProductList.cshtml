@@ -20,7 +20,7 @@
 
 }
 
-@AddProcessData("resourcepath", "/DesktopModules/RocketThemes/rocketecommerce/" + portalShop.AppTheme.AppThemeFolder + "/" + portalShop.AppTheme.AppVersionFolder + "/resx/")
+@AddProcessData("resourcepath", "/DesktopModules/RocketThemes/" + portalShop.AppTheme.AppThemeFolder + "/" + portalShop.AppTheme.AppVersionFolder + "/resx/")
 
 <div class="productlistflex">
 
@@ -29,91 +29,91 @@
         <h1>
             @if (!categoryData.Exists)
             {
-                @portalShop.StoreName 
+                @portalShop.StoreName
             }
             else
             {
                 @categoryData.Name
             }
         </h1>
-        
-        @RenderTemplate("SearchBanner.cshtml", "/DesktopModules/RocketThemes/rocketecommerce", productDataList.PortalShop.AppTheme.AppThemeFolder, Model, "1.0", true)
 
-        <div id="datasection">
+        @RenderTemplate("SearchBanner.cshtml", productDataList.PortalShop.AppTheme, Model, true)
 
-            <div id="datalist2" class="productgrid productgrid3">
-                @{
-                    var lp1 = 0;
-                }
-                @foreach (ProductLimpet productData in productDataList.GetArticleList())
+    <div id="datasection">
+
+        <div id="datalist2" class="productgrid productgrid3">
+            @{
+                var lp1 = 0;
+            }
+            @foreach (ProductLimpet productData in productDataList.GetArticleList())
+            {
+                lp1 += 1;
+                var logoRelPath = productData.LogoRelPath;
+                if (productData.LogoRelPath == "")
                 {
-                    lp1 += 1;
-                    var logoRelPath = productData.LogoRelPath;
-                    if (productData.LogoRelPath == "")
-                    {
-                        logoRelPath = "/DesktopModules/DNNrocket/api/images/noimage2.png";
-                    }
-                    var productListUrl = sessionParams.PageUrl + productData.UrlTokens(portalShop.ProductDetailPageUrl);
+                    logoRelPath = "/DesktopModules/DNNrocket/api/images/noimage2.png";
+                }
+                var productListUrl = sessionParams.PageUrl + productData.UrlTokens(portalShop.ProductDetailPageUrl);
 
-                    <div class="product">
+                <div class="product">
 
-                        <div class="productimg">
-                            <img src="@ThumbnailImageWebsiteDomainUrl(productDataList.PortalShop.EngineUrlWithProtocol,logoRelPath,300,300)" alt="@productData.Name" />
-                            <!-- Rollover -->
-                            <div class="productrollover">
-                                <div class="productrollover-content">
-                                    <div class="productrollover-actions">
-                                        @{ 
-                                            var modellistcount = productData.GetModelList().Count;
-                                            var optionlistcount = productData.GetOptionList().Count;
-                                        }
-                                        @if (modellistcount == 1 && optionlistcount == 0)
-                                        {
-                                            <a href="javascript:void(0);" rel="nofollow" class="simplisity_click buybutton" s-return="#minicartdisplay" s-cmd="rocketecommerce_addtocart" s-fields='{"productid":"@productData.ProductId"}'>@ResourceKey("RE.addtobasket", remoteParam.CultureCode)</a>
-                                        }
-                                        @if (modellistcount == 1 && optionlistcount == 0 && portalShop.ProductDetailPageUrl != "")
-                                        {
-                                            <span>/</span>
-                                        }
-                                        @if (portalShop.ProductDetailPageUrl != "")
-                                        {
-                                            <a href="@productListUrl" class="ajaxproduct" s-cmd="rocketecommerce_productdetail" s-return='#ecommerce-tag' s-fields='{"systemkey":"rocketecommerce","template":"ProductDetail.cshtml","productid":"@productData.ProductId"}' productid='@productData.ProductId' title="@productData.Name">@ResourceKey("RE.details", remoteParam.CultureCode)</a>
-                                        }
+                    <div class="productimg">
+                        <img src="@ThumbnailImageWebsiteDomainUrl(productDataList.PortalShop.EngineUrlWithProtocol,logoRelPath,300,300)" alt="@productData.Name" />
+                        <!-- Rollover -->
+                        <div class="productrollover">
+                            <div class="productrollover-content">
+                                <div class="productrollover-actions">
+                                    @{
+                                        var modellistcount = productData.GetModelList().Count;
+                                        var optionlistcount = productData.GetOptionList().Count;
+                                    }
+                                    @if (modellistcount == 1 && optionlistcount == 0)
+                                    {
+                                        <a href="javascript:void(0);" rel="nofollow" class="simplisity_click buybutton" s-return="#minicartdisplay" s-cmd="rocketecommerce_addtocart" s-fields='{"productid":"@productData.ProductId"}'>@ResourceKey("RE.addtobasket", remoteParam.CultureCode)</a>
+                                    }
+                                    @if (modellistcount == 1 && optionlistcount == 0 && portalShop.ProductDetailPageUrl != "")
+                                    {
+                                        <span>/</span>
+                                    }
+                                    @if (portalShop.ProductDetailPageUrl != "")
+                                    {
+                                        <a href="@productListUrl" class="ajaxproduct" s-cmd="rocketecommerce_productdetail" s-return='#ecommerce-tag' s-fields='{"systemkey":"rocketecommerce","template":"ProductDetail.cshtml","productid":"@productData.ProductId"}' productid='@productData.ProductId' title="@productData.Name">@ResourceKey("RE.details", remoteParam.CultureCode)</a>
+                                    }
 
-                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="productcontent">
-                            <h3>
-                                <a href="@productListUrl" class="ajaxproduct" s-cmd="rocketecommerce_productdetail" s-return='#ecommerce-tag' s-fields='{"systemkey":"rocketecommerce","template":"ProductDetail.cshtml","productid":"@productData.ProductId","remotelanguage":"@remoteParam.CultureCode","remotecall":"True"}' productid='@productData.ProductId' title="@productData.Name">@productData.Name</a>
-                            </h3>
-                            <div class="w3-row">
-                                @if (productData.SalePriceMinimum > 0)
-                                {
-                                    <div class="w3-half w3-padding">
-                                        <div class="productprice" style="text-decoration:line-through;">@productData.PriceMinimumDisplay()</div>
-                                    </div>
-                                    <div class="w3-half w3-red w3-padding">
-                                        <div class="w3-large">@productData.SalePriceMinimumDisplay()</div>
-                                    </div>
-                                }
-                                else
-                                {
-                                    <div class="w3-padding">
-                                        <div class="productprice">@productData.PriceMinimumDisplay()</div>
-                                    </div>
-                                }
-                            </div>
-                        </div>
-
                     </div>
-                }
-            </div>
+                    <div class="productcontent">
+                        <h3>
+                            <a href="@productListUrl" class="ajaxproduct" s-cmd="rocketecommerce_productdetail" s-return='#ecommerce-tag' s-fields='{"systemkey":"rocketecommerce","template":"ProductDetail.cshtml","productid":"@productData.ProductId","remotelanguage":"@remoteParam.CultureCode","remotecall":"True"}' productid='@productData.ProductId' title="@productData.Name">@productData.Name</a>
+                        </h3>
+                        <div class="w3-row">
+                            @if (productData.SalePriceMinimum > 0)
+                            {
+                                <div class="w3-half w3-padding">
+                                    <div class="productprice" style="text-decoration:line-through;">@productData.PriceMinimumDisplay()</div>
+                                </div>
+                                <div class="w3-half w3-red w3-padding">
+                                    <div class="w3-large">@productData.SalePriceMinimumDisplay()</div>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="w3-padding">
+                                    <div class="productprice">@productData.PriceMinimumDisplay()</div>
+                                </div>
+                            }
+                        </div>
+                    </div>
 
-            @RenderTemplate("ProductPaging.cshtml", "\\DesktopModules\\RocketThemes\\rocketecommerce", appThemeFolder, Model, "1.0", true)
-
+                </div>
+            }
         </div>
+
+        @RenderTemplate("ProductPaging.cshtml", productDataList.PortalShop.AppTheme, Model, true)
+
+    </div>
 
     </div>
 
@@ -128,7 +128,7 @@
         </div>
 
         <div class="productlistcat">
-            @RenderTemplate("CategorySideMenu.cshtml", "/DesktopModules/RocketThemes/RocketEcommerce", productDataList.PortalShop.AppTheme.AppThemeFolder, Model, "1.0", true)
+            @RenderTemplate("CategorySideMenu.cshtml", productDataList.PortalShop.AppTheme, Model, true)
         </div>
 
     </div>
