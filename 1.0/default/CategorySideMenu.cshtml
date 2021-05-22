@@ -19,7 +19,7 @@
     var portalShop = new PortalShopLimpet(categoryDataList.PortalId, categoryDataList.CultureCode);
 }
 
-<h3 style="margin-top:30px;">Catégories</h3>
+<h3 style="margin-top:30px;">@ResourceKey("RE.categories")</h3>
 
 <div class="categorytree w3-bar-block w3-light-grey w3-mobile w3-margin-top">
     <a href="@sessionParams.PageUrl" catid="0" class="ajaxcategory w3-bar-item w3-button w3-dark-grey">
@@ -66,6 +66,7 @@
             var stateObj = { "": "" };
             history.pushState(stateObj, "Title", $(this).attr('href'));
 
+            // we need "SearchBanner.cshtml" to be loaded on the page.
             $('#searchcategoryid').val($(this).attr("catid"));
             $('.triggersearch').trigger('click'); 
 

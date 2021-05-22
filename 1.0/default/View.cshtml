@@ -9,7 +9,11 @@
 <!-- !PAGE CONTENT! -->
 <div id="ecommerce-tag" class="ecommerce-container">
 
+
     @{
+
+        var remoteParam = (RemoteLimpet)Model.GetDataObject("remoteparam");
+
         PortalShopLimpet portalShop = null;
         var productData = (ProductLimpet)Model.GetDataObject("productdata");
         if (productData != null)
