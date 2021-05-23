@@ -19,7 +19,7 @@
     var portalShop = new PortalShopLimpet(categoryDataList.PortalId, categoryDataList.CultureCode);
 }
 
-<h3 style="margin-top:30px;">@ResourceKey("RE.categories")</h3>
+<h3 style="margin-top:30px;">@ResourceKey("RE.categories", remoteParam.CultureCode)</h3>
 
 <div class="categorytree w3-bar-block w3-light-grey w3-mobile w3-margin-top">
     <a href="@sessionParams.PageUrl" catid="0" class="ajaxcategory w3-bar-item w3-button w3-dark-grey">
