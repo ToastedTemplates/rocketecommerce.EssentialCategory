@@ -6,7 +6,6 @@
 
 @{
     var portalShop = (PortalShopLimpet)Model.List.First();
-    var remoteParam = (RemoteLimpet)Model.GetDataObject("remoteparam");
     var productData = (ProductLimpet)Model.GetDataObject("productdata");
     var sessionParams = (SessionParams)Model.SessionParamsData;
 }
@@ -36,7 +35,7 @@
         },
         "offers" : {
         "@@type" : "Offer",
-        "price" : "@(productData.BestPriceDisplay(remoteParam.CultureCode))",
+        "price" : "@(productData.BestPriceDisplay(sessionParams.CultureCode))",
         "priceCurrency": "@portalShop.CurrencyCode"
         }
         }
@@ -45,15 +44,15 @@
 }
 
 
-<link rel="stylesheet" href="@(remoteParam.EngineURL)@DNNrocketUtils.AppendFileModifiedDate("/DesktopModules/DNNrocket/API/Themes/config-w3/1.0/css/" + portalShop.ColorTheme)">
-<script type="text/javascript" src="@(remoteParam.EngineURL)@DNNrocketUtils.AppendFileModifiedDate("/DesktopModules/DNNrocket/Simplisity/js/simplisity.js")"></script>
-<script type="text/javascript" src="@(remoteParam.EngineURL)@DNNrocketUtils.AppendFileModifiedDate("/DesktopModules/RocketThemes/" + portalShop.AppTheme.AppThemeFolder + "/" + portalShop.AppTheme.AppVersionFolder + "/js/frontend.js")"></script>
-<link rel="stylesheet" href="@(remoteParam.EngineURL)@DNNrocketUtils.AppendFileModifiedDate("/DesktopModules/RocketThemes/" + portalShop.AppTheme.AppThemeFolder + "/" + portalShop.AppTheme.AppVersionFolder + "/css/theme.css")">
-<script type="text/javascript" src="@(remoteParam.EngineURL)@DNNrocketUtils.AppendFileModifiedDate("/DesktopModules/DNNrocket/js/jquery.validate.min.js")"></script>
+<link rel="stylesheet" href="@(sessionParams.EngineURL)@DNNrocketUtils.AppendFileModifiedDate("/DesktopModules/DNNrocket/API/Themes/config-w3/1.0/css/" + portalShop.ColorTheme)">
+<script type="text/javascript" src="@(sessionParams.EngineURL)@DNNrocketUtils.AppendFileModifiedDate("/DesktopModules/DNNrocket/Simplisity/js/simplisity.js")"></script>
+<script type="text/javascript" src="@(sessionParams.EngineURL)@DNNrocketUtils.AppendFileModifiedDate("/DesktopModules/RocketThemes/" + portalShop.AppTheme.AppThemeFolder + "/" + portalShop.AppTheme.AppVersionFolder + "/js/frontend.js")"></script>
+<link rel="stylesheet" href="@(sessionParams.EngineURL)@DNNrocketUtils.AppendFileModifiedDate("/DesktopModules/RocketThemes/" + portalShop.AppTheme.AppThemeFolder + "/" + portalShop.AppTheme.AppVersionFolder + "/css/theme.css")">
+<script type="text/javascript" src="@(sessionParams.EngineURL)@DNNrocketUtils.AppendFileModifiedDate("/DesktopModules/DNNrocket/js/jquery.validate.min.js")"></script>
 
-@if (DNNrocketUtils.GetLanguageCode(remoteParam.CultureCode) != "en")
+@if (DNNrocketUtils.GetLanguageCode(sessionParams.CultureCode) != "en")
 {
-    <script type="text/javascript" src="@(remoteParam.EngineURL)@DNNrocketUtils.AppendFileModifiedDate("/DesktopModules/DNNrocket/js/localization/messages_" + DNNrocketUtils.GetCurrentLanguageCode() + ".js")"></script>
+    <script type="text/javascript" src="@(sessionParams.EngineURL)@DNNrocketUtils.AppendFileModifiedDate("/DesktopModules/DNNrocket/js/localization/messages_" + DNNrocketUtils.GetCurrentLanguageCode() + ".js")"></script>
 }
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
@@ -67,10 +66,9 @@
             // THESE VALUES ARE NEEDED FOR REMOTE RENDERING, POPULATE THEM ON FIRST LOAD (In the module OnInit(EventArgs e)),
             //  THEN ADD THEM TO SESSIONPARAMS SO THEY ARE AVAILABLE FOR REMOTE SERVER RENDERING.
         }
-        simplisity_setSessionField("pageurl", '@remoteParam.RemotePageUrl');
-        simplisity_setSessionField("sitekey", '@remoteParam.RemoteSiteKey');
-        simplisity_setSessionField('remotecall', 'True');
-        simplisity_setSessionField('remotelanguage', '@remoteParam.CultureCode');
+        simplisity_setSessionField("pageurl", '@sessionParams.PageUrl');
+        simplisity_setSessionField("sitekey", '@sessionParams.SiteKey');
+        simplisity_setSessionField('culturecode', '@sessionParams.CultureCode');
 
     });
 

@@ -9,14 +9,13 @@
 @{
     var productDataList = (ProductLimpetList)Model.GetDataObject("productlist");
     var companyData = (CompanyLimpet)Model.GetDataObject("companydata");;
-    var remoteParam = (RemoteLimpet)Model.GetDataObject("remoteparam");
     var cartData = (CartLimpet)Model.GetDataObject("cartdata");
     var sessionParams = (SessionParams)Model.SessionParamsData;
 
     var appThemeFolder = productDataList.PortalShop.AppTheme.AppThemeFolder;
     var portalShop = productDataList.PortalShop;
 
-    var categoryData = new CategoryLimpet(portalShop.PortalId, sessionParams.GetInt("searchcategoryid"), remoteParam.CultureCode);
+    var categoryData = new CategoryLimpet(portalShop.PortalId, sessionParams.GetInt("searchcategoryid"), sessionParams.CultureCode);
 
 }
 
@@ -69,7 +68,7 @@
                                     }
                                     @if (modellistcount == 1 && optionlistcount == 0)
                                     {
-                                        <a href="javascript:void(0);" rel="nofollow" class="simplisity_click buybutton" s-return="#minicartdisplay" s-cmd="rocketecommerce_addtocart" s-fields='{"productid":"@productData.ProductId"}'>@ResourceKey("RE.addtobasket", remoteParam.CultureCode)</a>
+                                        <a href="javascript:void(0);" rel="nofollow" class="simplisity_click buybutton" s-return="#minicartdisplay" s-cmd="rocketecommerce_addtocart" s-fields='{"productid":"@productData.ProductId"}'>@ResourceKey("RE.addtobasket", sessionParams.CultureCode)</a>
                                     }
                                     @if (modellistcount == 1 && optionlistcount == 0 && portalShop.ProductDetailPageUrl != "")
                                     {
@@ -77,7 +76,7 @@
                                     }
                                     @if (portalShop.ProductDetailPageUrl != "")
                                     {
-                                        <a href="@productListUrl" class="ajaxproduct" s-cmd="rocketecommerce_productdetail" s-return='#ecommerce-tag' s-fields='{"systemkey":"rocketecommerce","template":"ProductDetail.cshtml","productid":"@productData.ProductId"}' productid='@productData.ProductId' title="@productData.Name">@ResourceKey("RE.details", remoteParam.CultureCode)</a>
+                                        <a href="@productListUrl" class="ajaxproduct" s-cmd="rocketecommerce_productdetail" s-return='#ecommerce-tag' s-fields='{"systemkey":"rocketecommerce","template":"ProductDetail.cshtml","productid":"@productData.ProductId"}' productid='@productData.ProductId' title="@productData.Name">@ResourceKey("RE.details", sessionParams.CultureCode)</a>
                                     }
 
                                 </div>
@@ -86,7 +85,7 @@
                     </div>
                     <div class="productcontent">
                         <h3>
-                            <a href="@productListUrl" class="ajaxproduct" s-cmd="rocketecommerce_productdetail" s-return='#ecommerce-tag' s-fields='{"systemkey":"rocketecommerce","template":"ProductDetail.cshtml","productid":"@productData.ProductId","remotelanguage":"@remoteParam.CultureCode","remotecall":"True"}' productid='@productData.ProductId' title="@productData.Name">@productData.Name</a>
+                            <a href="@productListUrl" class="ajaxproduct" s-cmd="rocketecommerce_productdetail" s-return='#ecommerce-tag' s-fields='{"systemkey":"rocketecommerce","template":"ProductDetail.cshtml","productid":"@productData.ProductId","remotelanguage":"@sessionParams.CultureCode","remotecall":"True"}' productid='@productData.ProductId' title="@productData.Name">@productData.Name</a>
                         </h3>
                         <div class="w3-row">
                             @if (productData.SalePriceMinimum > 0)
