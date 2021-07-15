@@ -18,7 +18,7 @@
 }
 
 
-@AddProcessData("resourcepath", "/DesktopModules/RocketThemes/rocketecommerce/" + portalShop.AppTheme.AppThemeFolder + "/" + portalShop.AppTheme.AppVersionFolder + "/resx/")
+@AddProcessData("resourcepath", "/DesktopModules/RocketThemes/" + portalShop.AppTheme.AppThemeFolder + "/" + portalShop.AppTheme.AppVersionFolder + "/resx/")
 
 <!-- we need to add the search banner, so we can goto the product list from the category. -->
 <div style="display:none;">
@@ -116,7 +116,7 @@
                                     </div>
                                 </div>
                                 <div class="quickviewbuy">
-                                    <a href="javascript:void(0)" rel="nofollow" class="w3-button simplisity_click buybutton" s-before="beforebuy" s-after="afterbuy" s-return="#addtocartreturn" s-cmd="rocketecommerce_addtocart" s-post="#productdatasection@(productData.ProductId)" s-fields='{"productid":"@productData.ProductId"}' title="@ResourceKey("RE.addtobasket", sessionParams.CultureCode)" style="width:60px;"><i class="fa fa-shopping-cart"></i></a>
+                                    <a href="javascript:void(0)" rel="nofollow" class="w3-button simplisity_click buybutton" s-before="beforebuy" s-after="afterbuy" s-return="#minicartdisplay" s-cmd="rocketecommerce_addtocart" s-post="#productdatasection@(productData.ProductId)" s-fields='{"productid":"@productData.ProductId"}' title="@ResourceKey("RE.addtobasket", sessionParams.CultureCode)" style="width:60px;">@MaterialIcon("shopping_cart")</a>
                                 </div>
                             </div>
 

@@ -20,8 +20,6 @@
     var sessionParams = (SessionParams)Model.SessionParamsData;
 
     var portalShop = (PortalShopLimpet)Model.GetDataObject("portalshop");
-    var systemInfoData = new SystemLimpet("rocketecommerce");
-    var rocketInterface = new RocketInterface(systemInfoData.Info, "settingcountry");
     var companyData = new CompanyLimpet(portalShop.PortalId, DNNrocketUtils.GetCurrentCulture());
 
 }

@@ -3,7 +3,6 @@
 @using Simplisity;
 @using RocketEcommerce.Components;
 @using DNNrocketAPI.Components;
-@using DNNrocket.Country.Components;
 
 @AddProcessData("resourcepath", "/DesktopModules/RocketThemes/dnnrocketmodule/Rocket_HtmlContent/1.0/resx/")
 @AddProcessData("resourcepath", "/DesktopModules/DNNrocket/Images/App_LocalResources/")
@@ -18,9 +17,7 @@
         info = new SimplisityInfo(cartData.Record);
     }
 
-    var systemInfoData = new SystemLimpet("rocketecommerce");
-    var rocketInterface = new RocketInterface(systemInfoData.Info, "settingcountry");
-    var countryData = new CountryLimpet(PortalUtils.GetPortalId(), rocketInterface);
+    var countryData = new CountryLimpet(PortalUtils.GetPortalId());
     var sessionParams = (SessionParams)Model.SessionParamsData;
     var portalShop = (PortalShopLimpet)Model.GetDataObject("portalshop");
 }

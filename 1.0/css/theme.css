@@ -100,3 +100,7 @@ a.ajaxcategory:hover i {color:white;}
 .quickviewbuy {flex:initial;}
 .quickviewbuy a.buybutton {display:block;width:auto !important;}
 }
+
+.material-icons {
+    vertical-align: middle;
+}

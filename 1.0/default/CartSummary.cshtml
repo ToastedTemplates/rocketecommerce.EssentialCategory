@@ -76,11 +76,11 @@
                 <h4>@ResourceKey("RE.products", sessionParams.CultureCode)</h4>
             </div>
 
-            @RenderTemplate("CartItemRows.cshtml", "\\DesktopModules\\RocketThemes\\rocketecommerce", appThemeFolder, Model, "1.0", true)
+            @RenderTemplate("CartItemRows.cshtml", portalShop.AppTheme, Model, true)
 
             <div class="w3-row">
                 <div class="w3-twothird">
-                    &nbsp
+                    &nbsp;
                 </div>
                 <div class="w3-third">
                     <table class="w3-right w3-table">
