@@ -2,6 +2,7 @@
 @using Simplisity;
 @using RocketEcommerce.Components;
 @using DNNrocketAPI.Components;
+@using RocketPortal.Components;
 
 @AddProcessData("resourcepath", "/DesktopModules/DNNrocket/api/App_LocalResources/")
 @AddProcessData("resourcepath", "/DesktopModules/DNNrocketModules/RocketECommerce/App_LocalResources/")
@@ -14,6 +15,7 @@
 
     var appThemeFolder = productData.PortalShop.AppTheme.AppThemeFolder;
     var portalShop = productData.PortalShop;
+    var portalData = new PortalLimpet(PortalUtils.GetCurrentPortalId());
 
 }
 
@@ -55,7 +57,7 @@
                     <div class="productquickview">
 
                         <div class="quickviewimage">
-                            <img src="@ThumbnailImageWebsiteDomainUrl(productData.PortalShop.EngineUrlWithProtocol,logoRelPath,450, 450)" popupsrc="@ThumbnailImageWebsiteDomainUrl(productData.PortalShop.EngineUrlWithProtocol, logoRelPath, 800, 0)" class="imgrollovertarget" alt="@productData.Name" onclick="popupImage(this)" />
+                            <img src="@ThumbnailImageWebsiteDomainUrl(portalData.EngineUrlWithProtocol,logoRelPath,450, 450)" popupsrc="@ThumbnailImageWebsiteDomainUrl(portalData.EngineUrlWithProtocol, logoRelPath, 800, 0)" class="imgrollovertarget" alt="@productData.Name" onclick="popupImage(this)" />
                             @if (productData.GetImages().Count > 1)
                             {
                                 <div class="quickviewgallery">
@@ -66,7 +68,7 @@
                                     {
                                         if (imgLp <= 5)
                                         {
-                                            <img src="@ThumbnailImageWebsiteDomainUrl(productData.PortalShop.EngineUrlWithProtocol, i.RelPath, 450, 450)" popupsrc="@ThumbnailImageWebsiteDomainUrl(productData.PortalShop.EngineUrlWithProtocol, i.RelPath, 800, 0)" class="imgrollover" />
+                                            <img src="@ThumbnailImageWebsiteDomainUrl(portalData.EngineUrlWithProtocol, i.RelPath, 450, 450)" popupsrc="@ThumbnailImageWebsiteDomainUrl(portalData.EngineUrlWithProtocol, i.RelPath, 800, 0)" class="imgrollover" />
                                         }
                                         imgLp += 1;
                                     }
@@ -179,7 +181,7 @@
 
         $('.imgrollover').unbind("mouseover");
         $(".imgrollover").mouseover(function () {
-            $('.imgrollovertarget').attr('src', $(this).attr('src')) ;
+            $('.imgrollovertarget').attr('src', $(this).attr('src'));
             $('.imgrollovertarget').attr('popupsrc', $(this).attr('popupsrc'));
         });
 

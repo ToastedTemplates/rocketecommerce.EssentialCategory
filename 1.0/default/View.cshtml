@@ -3,6 +3,10 @@
 @using RocketEcommerce.Components;
 @using DNNrocketAPI.Components;
 
+@{ 
+    var remoteModule = (RemoteModule)Model.GetDataObject("remotemodule");
+}
+
 @AddProcessData("resourcepath", "/DesktopModules/DNNrocket/api/App_LocalResources/")
 @AddProcessData("resourcepath", "/DesktopModules/DNNrocketModules/RocketECommerce/App_LocalResources/")
 
@@ -27,7 +31,7 @@
             portalShop = productDataList.PortalShop;
             @RenderTemplate("ProductList.cshtml", portalShop.AppTheme, Model, true)
         }
-        @AddProcessData("resourcepath", "/DesktopModules/RocketThemes/" + portalShop.AppTheme.AppThemeFolder + "/" + portalShop.AppTheme.AppVersionFolder + "/resx/")
+        @AddProcessData("resourcepath", "/DesktopModules/RocketThemes/" + remoteModule.AppThemeFolder + "/" + remoteModule.AppThemeVersion + "/resx/")
     }
 
 </div>
