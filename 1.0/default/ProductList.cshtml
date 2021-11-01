@@ -12,16 +12,14 @@
     var companyData = (CompanyLimpet)Model.GetDataObject("companydata"); ;
     var cartData = (CartLimpet)Model.GetDataObject("cartdata");
     var sessionParams = (SessionParams)Model.SessionParamsData;
-
-    var appThemeFolder = productDataList.PortalShop.AppTheme.AppThemeFolder;
     var portalShop = productDataList.PortalShop;
-
-    var categoryData = new CategoryLimpet(portalShop.PortalId, sessionParams.GetInt("searchcategoryid"), sessionParams.CultureCode);
     var portalData = new PortalLimpet(PortalUtils.GetCurrentPortalId());
-
+    var remoteModule = (RemoteModule)Model.GetDataObject("remotemodule");
+    var appTheme = (AppThemeLimpet)Model.GetDataObject("apptheme");
+    var categoryData = new CategoryLimpet(portalShop.PortalId, productDataList.CategorId, sessionParams.CultureCode);
 }
 
-@AddProcessData("resourcepath", "/DesktopModules/RocketThemes/" + portalShop.AppTheme.AppThemeFolder + "/" + portalShop.AppTheme.AppVersionFolder + "/resx/")
+@AddProcessData("resourcepath", "/DesktopModules/RocketThemes/" + remoteModule.AppThemeFolder + "/" + remoteModule.AppThemeVersion + "/resx/")
 
 <div class="productlistflex">
 
@@ -34,11 +32,11 @@
             }
             else
             {
-                <span>@categoryData.Name</span>                
+                <span>@categoryData.Name</span>
             }
         </h1>
 
-        @RenderTemplate("SearchBanner.cshtml", productDataList.PortalShop.AppTheme, Model, true)
+        @RenderTemplate("SearchBanner.cshtml", appTheme, Model, true)
 
         <div id="datasection">
 
@@ -70,7 +68,7 @@
                                         }
                                         @if (modellistcount == 1 && optionlistcount == 0)
                                         {
-                                            <a href="javascript:void(0);" rel="nofollow" class="simplisity_click buybutton" s-return="#minicartdisplay" s-cmd="rocketecommerce_addtocart" s-fields='{"productid":"@productData.ProductId"}'>@ResourceKey("RE.addtobasket", sessionParams.CultureCode)</a>
+                                            <a href="javascript:void(0);"  onclick="addproducttocart('@productData.ProductId');" rel="nofollow" class="buybutton">@ResourceKey("RE.addtobasket", sessionParams.CultureCode)</a>
                                         }
                                         @if (modellistcount == 1 && optionlistcount == 0 && portalShop.ProductDetailPageUrl != "")
                                         {
@@ -87,7 +85,7 @@
                         </div>
                         <div class="productcontent">
                             <h3>
-                                <a href="@productListUrl" class="ajaxproduct" s-cmd="rocketecommerce_productdetail" s-return='#ecommerce-tag' s-fields='{"systemkey":"rocketecommerce","template":"ProductDetail.cshtml","productid":"@productData.ProductId","remotelanguage":"@sessionParams.CultureCode","remotecall":"True"}' productid='@productData.ProductId' title="@productData.Name">@productData.Name</a>
+                                <a href="@productListUrl" class="ajaxproduct" s-cmd="rocketecommerce_productdetail" s-return='#ecommerce-tag' s-fields='{"systemkey":"rocketecommerce","template":"ProductDetail.cshtml","productid":"@productData.ProductId","remotelanguage":"@sessionParams.CultureCode","remotecall":"True","dataref":"@(remoteModule.DataRef)"}' productid='@productData.ProductId' title="@productData.Name">@productData.Name</a>
                             </h3>
                             <div class="w3-row">
                                 @if (productData.SalePriceMinimum > 0)
@@ -112,7 +110,7 @@
                 }
             </div>
 
-            @RenderTemplate("ProductPaging.cshtml", productDataList.PortalShop.AppTheme, Model, true)
+            @RenderTemplate("ProductPaging.cshtml", appTheme, Model, true)
 
         </div>
 
@@ -122,11 +120,11 @@
 
         <!-- Cart (Include design to stop flicker on the page) -->
         <div id="minicartdisplay" class="productlistcart">
-            @RenderTemplate("MiniCart.cshtml", productDataList.PortalShop.AppTheme, Model)
+            @RenderTemplate("MiniCart.cshtml", appTheme, Model)
         </div>
 
         <div class="productlistcat">
-            @RenderTemplate("CategorySideMenu.cshtml", productDataList.PortalShop.AppTheme, Model)
+            @RenderTemplate("CategorySideMenu.cshtml", appTheme, Model)
         </div>
 
     </div>
@@ -137,26 +135,15 @@
 
     $(document).ready(function () {
 
+        $('.productlistdisplay').activateSimplisityPanel()
 
-        // PRODUCT EVENTS
-        // View product detail and add to url, to make SEO friendly
-        $('.ajaxproduct').unbind("click");
-        $('.ajaxproduct').click(function (event) {
-            event.preventDefault();
-
-            // add to browser bar and history
-            var stateObj = { productid: $(this).attr("productid") };
-            history.pushState(stateObj, "Title", $(this).attr("href"));
-
-            simplisity_callserver($(this))
-
-        });
-
-        simplisitypanelecommercetag();
-
-        firstLoadMove();
     });
 
+    function addproducttocart(productid, spost) {
+        $('#simplisity_loader').show();
+        $('#productmodelid' + productid).hide();
+        $('#minicartdisplay').getSimplisity('@(sessionParams.ApiUrl)', 'rocketecommerce_addtocart', '{"template":"MiniCart.cshtml","productid":"' + productid + '","dataref":"@(remoteModule.DataRef)"}', '', spost)
+    }
 
 
 </script>
