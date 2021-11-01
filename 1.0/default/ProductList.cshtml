@@ -135,13 +135,10 @@
 
     $(document).ready(function () {
 
-        $('.productlistdisplay').activateSimplisityPanel()
-
     });
 
     function addproducttocart(productid, spost) {
         $('#simplisity_loader').show();
-        $('#productmodelid' + productid).hide();
         $('#minicartdisplay').getSimplisity('@(sessionParams.ApiUrl)', 'rocketecommerce_addtocart', '{"template":"MiniCart.cshtml","productid":"' + productid + '","dataref":"@(remoteModule.DataRef)"}', '', spost)
     }
 
