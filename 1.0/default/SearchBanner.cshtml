@@ -53,11 +53,11 @@
 </div>
 
 <!-- Element to trigger simplisity call from JS event -->
-<span class="w3-hide simplisity_click triggersearch" s-reload="true" s-sessionfield='#searchtext,#pagesize,#searchcategoryid,#orderbyref' s-cmdurl="@(sessionParams.ApiUrl)" s-cmd="rocketecommerce_productlist" s-post=".searchdata" s-return='#ecommerce-tag' s-fields='{"systemkey":"rocketecommerce","template":"ProductList.cshtml","productlist":"True","dataref":"@(remoteModule.DataRef)"}'></span>
+<span class="w3-hide triggersearch" onclick="setSessionParams();"></span>
 
 <script>
 
-    $(document).ready(function () {
+    $(document).ready(function () {        
 
         $('.clearsearch').unbind("click");
         $('.clearsearch').click(function () {
@@ -94,5 +94,13 @@
         }
 
     });
+
+    function setSessionParams() {
+        simplisity_setSessionField('searchtext', $('#searchtext').val());
+        simplisity_setSessionField('pagesize', $('#pagesize').val());
+        simplisity_setSessionField('searchcategoryid', $('#searchcategoryid').val());
+        simplisity_setSessionField('orderbyref', $('#orderbyref').val());
+        location.reload();
+    } 
 
 </script>
