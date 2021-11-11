@@ -24,7 +24,7 @@
             <div class="w3-bar">
                 @TextBox(new SimplisityInfo(), "genxml/textbox/searchtext", "class='w3-bar-item w3-input w3-border simplisity_sessionfield actionentrykey' autocomplete='off' style='' ")
                 <span class="w3-bar-item w3-button w3-left w3-border-red w3-deep-orange clearsearch " onclick="$('#searchcategoryid').val('0');$('#searchtext').val(''); $('.triggersearch').trigger('click');" style="height: 40px; display: none;" s-fields=''>@ButtonIcon(ButtonTypes.cancelsearch)</span>
-                <span class="w3-bar-item w3-button w3-left w3-border simplisity_click dosearch" onclick="altersearchurl();$('#searchcategoryid').val('0'); $('.triggersearch').trigger('click');" style="height:40px;">@ButtonIcon(ButtonTypes.search)</span>
+                <span class="w3-bar-item w3-button w3-left w3-border simplisity_click dosearch" onclick="$('#searchcategoryid').val('0'); $('.triggersearch').trigger('click');" style="height:40px;">@ButtonIcon(ButtonTypes.search)</span>
             </div>
         </div>
         <div class="w3-half">
@@ -57,7 +57,7 @@
 
 <script>
 
-    $(document).ready(function () {        
+    $(document).ready(function () {
 
         $('.clearsearch').unbind("click");
         $('.clearsearch').click(function () {
@@ -100,7 +100,7 @@
         simplisity_setSessionField('pagesize', $('#pagesize').val());
         simplisity_setSessionField('searchcategoryid', $('#searchcategoryid').val());
         simplisity_setSessionField('orderbyref', $('#orderbyref').val());
-        location.reload();
-    } 
+        window.location.href = '@(sessionParams.PageUrl)';
+    }
 
 </script>
