@@ -106,12 +106,12 @@
                                 <div class="quickviewqty">
                                     <div class="w3-bar">
                                         <div class="w3-bar-item w3-border w3-col w3-center w3-button product-subtract" productid="@(productData.ProductId)">&minus;</div>
-                                        <input class="w3-bar-item w3-col w3-input w3-border-top w3-border-bottom w3-center qtyvalue" id="qty@(productData.ProductId)" s-xpath="genxml/textbox/qty" value="1" style="width:60px;" />
+                                        <input type="number" readonly min="10" max="999" class="w3-bar-item w3-col w3-input w3-border-top w3-border-bottom w3-center qtyvalue" id="qty@(productData.ProductId)" s-xpath="genxml/textbox/qty" value="1" style="width:60px;" />
                                         <div class="w3-bar-item w3-border w3-col w3-center w3-button product-plus" productid="@(productData.ProductId)">&plus;</div>
                                     </div>
                                 </div>
                                 <div class="quickviewbuy">
-                                    <a href="javascript:void(0)"  onclick="addproducttocart('@productData.ProductId','#productdatasection@(productData.ProductId)');" rel="nofollow" class="w3-button buybutton" title="@ResourceKey("RE.addtobasket", sessionParams.CultureCode)" style="width:60px;">@MaterialIcon("shopping_cart")</a>
+                                    <a href="javascript:void(0)" onclick="addproducttocart('@productData.ProductId','#productdatasection@(productData.ProductId)');" rel="nofollow" class="w3-button buybutton" title="@ResourceKey("RE.addtobasket", sessionParams.CultureCode)" style="width:60px;">@MaterialIcon("shopping_cart")</a>
                                 </div>
                             </div>
 
@@ -169,8 +169,8 @@
     });
 
     function addproducttocart(productid, spost) {
-        $('#simplisity_loader').show();
-        $('#minicartdisplay').getSimplisity('@(sessionParams.ApiUrl)', 'remote_addtocart', '{"template":"MiniCart.cshtml","productid":"' + productid + '","dataref":"@(remoteModule.DataRef)"}', '', spost)
+        $('.simplisity_loader').show();
+        $('#minicartdisplay').getSimplisity('@(sessionParams.ApiUrl)', 'remote_addtocart', '{"template":"MiniCart.cshtml","productid":"' + productid + '","moduleref":"@(remoteModule.ModuleRef)"}', '', spost)
     }
 
 </script>

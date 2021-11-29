@@ -16,10 +16,11 @@
     var portalData = new PortalLimpet(PortalUtils.GetCurrentPortalId());
     var remoteModule = (RemoteModule)Model.GetDataObject("remotemodule");
     var appTheme = (AppThemeLimpet)Model.GetDataObject("apptheme");
+    var appThemeDefault = (AppThemeLimpet)Model.GetDataObject("appthemedefault");
     var categoryData = new CategoryLimpet(portalShop.PortalId, productDataList.CategoryId, sessionParams.CultureCode);
 }
 
-@AddProcessData("resourcepath", "/DesktopModules/RocketThemes/" + remoteModule.AppThemeFolder + "/" + remoteModule.AppThemeVersion + "/resx/")
+@AddProcessData("resourcepath", "/DesktopModules/RocketThemes/" + remoteModule.AppThemeViewFolder + "/" + remoteModule.AppThemeViewVersion + "/resx/")
 
 <div class="productlistflex">
 
@@ -36,7 +37,7 @@
             }
         </h1>
 
-        @RenderTemplate("SearchBanner.cshtml", appTheme, Model, true)
+        @RenderTemplate("SearchBanner.cshtml", appThemeDefault, Model, true)
 
         <div id="datasection">
 
@@ -68,7 +69,7 @@
                                         }
                                         @if (modellistcount == 1 && optionlistcount == 0)
                                         {
-                                            <a href="javascript:void(0);"  onclick="addproducttocart('@productData.ProductId');" rel="nofollow" class="buybutton">@ResourceKey("RE.addtobasket", sessionParams.CultureCode)</a>
+                                            <a href="javascript:void(0);" onclick="addproducttocart('@productData.ProductId');" rel="nofollow" class="buybutton">@ResourceKey("RE.addtobasket", sessionParams.CultureCode)</a>
                                         }
                                         @if (modellistcount == 1 && optionlistcount == 0 && portalShop.ProductDetailPageUrl != "")
                                         {
@@ -85,7 +86,17 @@
                         </div>
                         <div class="productcontent">
                             <h3>
-                                <a href="@productListUrl" class="ajaxproduct" s-cmd="remote_productdetail" s-return='#ecommerce-tag' s-fields='{"systemkey":"rocketecommerce","template":"ProductDetail.cshtml","productid":"@productData.ProductId","remotelanguage":"@sessionParams.CultureCode","remotecall":"True","dataref":"@(remoteModule.DataRef)"}' productid='@productData.ProductId' title="@productData.Name">@productData.Name</a>
+                                <a href="@productListUrl" class="ajaxproduct" s-cmd="remote_productdetail" s-return='#ecommerce-tag' s-fields='{"systemkey":"rocketecommerce","template":"ProductDetail.cshtml","productid":"@productData.ProductId","remotelanguage":"@sessionParams.CultureCode","remotecall":"True","dataref":"@(remoteModule.DataRef)"}' productid='@productData.ProductId' title="@productData.Name">
+                                    @if (productData.Name.Length > 20)
+                                    {
+                                        @productData.Name.Substring(0, 20)
+                                        <span>...</span>
+                                    }
+                                    else
+                                    {
+                                        @productData.Name
+                                    }
+                                </a>
                             </h3>
                             <div class="w3-row">
                                 @if (productData.SalePriceMinimum > 0)
@@ -110,7 +121,7 @@
                 }
             </div>
 
-            @RenderTemplate("ProductPaging.cshtml", appTheme, Model, true)
+            @RenderTemplate("ProductPaging.cshtml", appThemeDefault, Model, true)
 
         </div>
 
@@ -138,7 +149,7 @@
     });
 
     function addproducttocart(productid, spost) {
-        $('#simplisity_loader').show();
+        $('.simplisity_loader').show();
         $('#minicartdisplay').getSimplisity('@(sessionParams.ApiUrl)', 'remote_addtocart', '{"template":"MiniCart.cshtml","productid":"' + productid + '","dataref":"@(remoteModule.DataRef)"}', '', spost)
     }
 
