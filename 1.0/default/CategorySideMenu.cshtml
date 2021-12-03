@@ -3,6 +3,8 @@
 @using RocketEcommerce.Components;
 @using DNNrocketAPI.Components;
 
+@SecuritySiteKey(Model.SessionParamsData)
+
 @AddProcessData("resourcepath", "/DesktopModules/DNNrocket/api/App_LocalResources/")
 @AddProcessData("resourcepath", "/DesktopModules/DNNrocketModules/RocketEcommerce/App_LocalResources/")
 
@@ -21,7 +23,7 @@
 <h3 style="margin-top:30px;">@ResourceKey("RE.categories", sessionParams.CultureCode)</h3>
 
 <div class="categorytree w3-bar-block w3-light-grey w3-mobile w3-margin-top">
-    <a href="@sessionParams.PageUrl" catid="0"  onclick="$('.simplisity_loader').show();" class="w3-bar-item w3-button w3-dark-grey">
+    <a href="@sessionParams.PageUrl" catid="0" onclick="$('.simplisity_loader').show();" class="w3-bar-item w3-button w3-dark-grey">
         @ResourceKey("RE.allproducts")
     </a>
     @foreach (var categoryData in categoryDataList.GetCategoryTree())
@@ -48,7 +50,7 @@
                         chevron_right
                     </span>
                 }
-                <span>@categoryData.Name</span>                
+                <span>@categoryData.Name</span>
             </a>
         </div>
     }
@@ -69,7 +71,7 @@
 
             // we need "SearchBanner.cshtml" to be loaded on the page.
             $('#searchcategoryid').val($(this).attr("catid"));
-            $('.triggersearch').trigger('click'); 
+            $('.triggersearch').trigger('click');
 
         });
 
