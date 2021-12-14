@@ -41,7 +41,7 @@
         }
         var productListUrl = sessionParams.PageUrl + categoryData.UrlTokens(portalShop.ProductListPageUrl);
         <div class="@selectedcolor @toplevelclass">
-            <a href="@productListUrl" class="" onclick="$('.simplisity_loader').show();" catid="@categoryData.CategoryId">
+            <a href="@productListUrl" class="categoryitem" onclick="$('.simplisity_loader').show();" catid="@categoryData.CategoryId">
                 @if (categoryData.Level > 0)
                 {
                     <span class="material-icons">

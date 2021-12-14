@@ -16,16 +16,10 @@
     var portalData = new PortalLimpet(PortalUtils.GetCurrentPortalId());
     var remoteModule = (RemoteModule)Model.GetDataObject("remotemodule");
     var appTheme = (AppThemeLimpet)Model.GetDataObject("apptheme");
-
 }
 
 
 @AddProcessData("resourcepath", "/DesktopModules/RocketThemes/" + remoteModule.AppThemeFolder + "/" + remoteModule.AppThemeVersion + "/resx/")
-
-<!-- we need to add the search banner, so we can goto the product list from the category. -->
-<div style="display:none;">
-    @RenderTemplate("SearchBanner.cshtml", appTheme, Model, true)
-</div>
 
 <div class="productdetailflex">
 
@@ -98,7 +92,7 @@
                                 {
                                     displaymodels = "";
                                 }
-                                <div id="modelinput@(productData.ProductId)" class="w3-border w3-white w3-margin-bottom modelinput @displaymodels">@ModelDropdown(productData)</div>
+                                <div id="modelinput@(productData.ProductId)" class="w3-white w3-margin-bottom modelinput @displaymodels">@ModelDropdown(productData)</div>
                                 <div id="optionsinput@(productData.ProductId)" class="w3-white w3-margin-bottom modelinput">@OptionsInput(productData)</div>
                             </div>
 
@@ -106,7 +100,7 @@
                                 <div class="quickviewqty">
                                     <div class="w3-bar">
                                         <div class="w3-bar-item w3-border w3-col w3-center w3-button product-subtract" productid="@(productData.ProductId)">&minus;</div>
-                                        <input type="number" readonly min="10" max="999" class="w3-bar-item w3-col w3-input w3-border-top w3-border-bottom w3-center qtyvalue" id="qty@(productData.ProductId)" s-xpath="genxml/textbox/qty" value="1" style="width:60px;" />
+                                        <input type="number" min="0" class="w3-bar-item w3-col w3-input w3-border-top w3-border-bottom w3-center qtyvalue" id="qty@(productData.ProductId)" s-xpath="genxml/textbox/qty" value="1" style="width:60px;" />
                                         <div class="w3-bar-item w3-border w3-col w3-center w3-button product-plus" productid="@(productData.ProductId)">&plus;</div>
                                     </div>
                                 </div>

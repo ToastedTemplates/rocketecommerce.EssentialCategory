@@ -58,7 +58,7 @@
                     <div class="product">
 
                         <div class="productimg">
-                            <img src="@ThumbnailImageWebsiteDomainUrl(portalData.EngineUrlWithProtocol,logoRelPath,300,300)" alt="@productData.Name" />
+                            <img src="@ThumbnailImageWebsiteDomainUrl(portalData.EngineUrlWithProtocol,logoRelPath,480,480)" alt="@productData.Name" />
                             <!-- Rollover -->
                             <div class="productrollover">
                                 <div class="productrollover-content">
@@ -87,15 +87,7 @@
                         <div class="productcontent">
                             <h3>
                                 <a href="@productListUrl" class="ajaxproduct" s-cmd="remote_productdetail" s-return='#ecommerce-tag' s-fields='{"systemkey":"rocketecommerce","template":"ProductDetail.cshtml","productid":"@productData.ProductId","remotelanguage":"@sessionParams.CultureCode","remotecall":"True","dataref":"@(remoteModule.DataRef)"}' productid='@productData.ProductId' title="@productData.Name">
-                                    @if (productData.Name.Length > 20)
-                                    {
-                                        @productData.Name.Substring(0, 20)
-                                        <span>...</span>
-                                    }
-                                    else
-                                    {
-                                        @productData.Name
-                                    }
+                                    @productData.Name
                                 </a>
                             </h3>
                             <div class="w3-row">
