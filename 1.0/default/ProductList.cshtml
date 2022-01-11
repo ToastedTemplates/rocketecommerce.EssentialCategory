@@ -26,16 +26,14 @@
 
     <div class="productlist">
 
-        <h1>
-            @if (!categoryData.Exists)
-            {
-                <span>@companyData.CompanyName</span>
-            }
-            else
-            {
-                <span>@categoryData.Name</span>
-            }
-        </h1>
+        @if (!categoryData.Exists)
+		{
+			<h1>@companyData.CompanyName</h1>
+		}
+		else
+		{
+			<h1>@categoryData.Name</h1>
+		}
 
         @RenderTemplate("SearchBanner.cshtml", appThemeDefault, Model, true)
 
@@ -77,7 +75,7 @@
                                         }
                                         @if (portalShop.ProductDetailPageUrl != "")
                                         {
-                                            <a href="@productListUrl" title="@productData.Name">@ResourceKey("RE.details", sessionParams.CultureCode)</a>
+                                            <a href="@productListUrl#ecommerce-tag" title="@productData.Name">@ResourceKey("RE.details", sessionParams.CultureCode)</a>
                                         }
 
                                     </div>
@@ -86,7 +84,7 @@
                         </div>
                         <div class="productcontent">
                             <h3>
-                                <a href="@productListUrl" class="ajaxproduct" s-cmd="remote_productdetail" s-return='#ecommerce-tag' s-fields='{"systemkey":"rocketecommerce","template":"ProductDetail.cshtml","productid":"@productData.ProductId","remotelanguage":"@sessionParams.CultureCode","remotecall":"True","dataref":"@(remoteModule.DataRef)"}' productid='@productData.ProductId' title="@productData.Name">
+                                <a href="@productListUrl#ecommerce-tag" class="ajaxproduct" s-cmd="remote_productdetail" s-return='#ecommerce-tag' s-fields='{"systemkey":"rocketecommerce","template":"ProductDetail.cshtml","productid":"@productData.ProductId","remotelanguage":"@sessionParams.CultureCode","remotecall":"True","dataref":"@(remoteModule.DataRef)"}' productid='@productData.ProductId' title="@productData.Name">
                                     @productData.Name
                                 </a>
                             </h3>
